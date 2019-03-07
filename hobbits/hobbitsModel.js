@@ -5,11 +5,16 @@ module.exports = {
   update,
   remove,
   getAll,
-  findById,
+  findById
 };
 
 async function insert(hobbit) {
-  return null;
+  // de-structure array of ids, and grab the first id (which is the added hobbit id)
+  const [id] = await db('hobbits').insert(hobbit);
+
+  return db('hobbits')
+    .where({ id })
+    .first();
 }
 
 async function update(id, changes) {
